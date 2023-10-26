@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>자유게시판</title>
+    <!-- 부트스트랩 api -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <link href="/css/main.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/67d5da7423.js" crossorigin="anonymous"></script>
+    <script src="/js/developing.js"></script>
+</head>
+<body>
+    <header id="header">
+        <nav class="left">
+            <a href="#menu">
+                <span>Menu</span>
+            </a>
+        </nav>
+        <a href="/" class="logo">PetKorea</a>
+        <nav class="right" sec:authorize="isAuthenticated()">
+            <a href="/logout/" class="button alt">Log out</a>
+        </nav>
+    </header>
+
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="/">Home</a></li>
+            <li><a onclick="developing();">사진자랑</a></li>
+            <li><a onclick="developing();">애완용품</a></li>
+            <li><a onclick="developing();">병원정보</a></li>
+            <li><a href="/board/">자유게시판</a></li>
+        </ul>
+        <ul class="actions vertical">
+            <li><a href="#" class="button fit">Login</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row align-items-center" style="height: 200px; width: 100%; text-align: center">
+            <h1>자유 게시판</h1>
+        </div>
+        <div class="row" style="height: 100px; width: 100%; text-align: end;">
+            <div sec:authorize="isAuthenticated()">
+                <a href="/board/add/">글 작성</a>
+            </div>
+        </div>
+        <div class="row align-items-center" style="height: 100px; width: 100%; border: 1px solid black;">
+            <div class="col-3 align-self-center" style="font-size: 20px; font-weight: bold; text-align: center; border-right: 1px solid black;">
+                글 번호
+            </div>
+            <div class="col-3" style="font-size: 20px; font-weight: bold; text-align: center; border-right: 1px solid black;">
+                제목
+            </div>
+            <div class="col-3" style="font-size: 20px; font-weight: bold; text-align: center; border-right: 1px solid black;">
+                작성자
+            </div>
+            <div class="col-3" style="font-size: 20px; font-weight: bold; text-align: center;">
+                상세보기
+            </div>
+        </div>
+        <div style="height: 300px; width: 100%;">
+            <div th:each="board : ${boardList}" class="row align-items-center" style="height: 60px; width: 100%; border-bottom: 1px solid black;">
+                <div th:text="${board.idx}" class="col-3" style="font-size: 20px; font-weight: bold; text-align: center;">
+                    글 번호
+                </div>
+                <div th:text="${board.title}" class="col-3" style="font-size: 20px; font-weight: bold; text-align: center;">
+                    제목
+                </div>
+                <div th:text="${board.writer}" class="col-3" style="font-size: 20px; font-weight: bold; text-align: center;">
+                    작성자
+                </div>
+                <div class="col-3" style="font-size: 20px; font-weight: bold; text-align: center;">
+                    <a class="btn btn-primary" th:onclick="postPage([[${board.idx}]])">상세보기</a>
+                </div>
+            </div>
+        </div>
+        <div style="height: 10px; width: 100%">
+
+        </div>
+        <div th:if="${!boardList.isEmpty()}">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!boardList.hasPrevious} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|?page=${boardList.number-1}|}">
+                        <span>이전</span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(0, boardList.totalPages-1)}"
+                    th:if="${page >= boardList.number-5 and page <= boardList.number+5}"
+                    th:classappend="${page == boardList.number} ? 'active'"
+                    class="page-item">
+                    <a th:text="${page} + 1" class="page-link" th:href="@{|?page=${page}|}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!boardList.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${boardList.number+1}|}">
+                        <span>다음</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <div class="inner">
+            <h2>Get In Touch</h2>
+            <ul class="actions">
+                <li><i class="fa-solid fa-blog"></i> <a href="https://shpark0920.tistory.com/">shpark0920.tistory.com</a></li>
+                <li><i class="fa-brands fa-github"></i><a href="https://github.com/sh990920">github.com/sh990920</a></li>
+                <li><i class="fa-brands fa-github"></i><a href="https://github.com/NUKAHMIX">github.com/NUKAHMIX</a> </li>
+            </ul>
+        </div>
+    </footer>
+    <div class="copyright">
+        Powered by: <a href="https://templated.co/">TEMPLATED</a>.
+    </div>
+</body>
+<script src="/js/postPage.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrolly.min.js"></script>
+<script src="/js/skel.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+</html>

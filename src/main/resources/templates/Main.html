@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/main.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/67d5da7423.js" crossorigin="anonymous"></script>
+    <script src="/js/developing.js"></script>
+</head>
+<body>
+
+    <header id="header">
+        <nav class="left">
+            <a href="#menu">
+                <span>Menu</span>
+            </a>
+        </nav>
+        <a href="/" class="logo">PetKorea</a>
+        <nav class="right" sec:authorize="isAuthenticated()">
+            <a href="/logout/" class="button alt">Log out</a>
+        </nav>
+    </header>
+
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="/">Home</a></li>
+            <li><a onclick="developing();">사진자랑</a></li>
+            <li><a onclick="developing();">애완용품</a></li>
+            <li><a onclick="developing();">병원정보</a></li>
+            <li><a href="/board/">자유게시판</a></li>
+        </ul>
+        <ul class="actions vertical">
+            <li><a href="#" class="button fit">Login</a></li>
+        </ul>
+    </nav>
+
+    <section id="banner">
+        <div class="content">
+            <h1>PetKorea</h1>
+            <p>모든 반려동물을 위한 국내 최대 종합 커뮤니티<br>강아지, 고양이, 등등 수 많은 동물들이 함께하고 있습니다.</p>
+            <ul class="actions">
+                <li><a href="#one" class="button scrolly">Get Started</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="one" class="wrapper">
+        <div class="inner flex flex-3">
+            <div class="flex-item left">
+                <div>
+                    <h3>애완동물 사진 공유</h3>
+                    <p>자신의 아름다운 애완동물 사진을 공유해요<br>많은 사진들과 함께 추억을 쌓아가세요</p>
+                </div>
+                <div>
+                    <h3>애완용품 정보 및 구매</h3>
+                    <p>애완용품을 직접 사용하고 직접 듣는 후기<br>마음에 들면 즉시 구매 가능</p>
+                </div>
+            </div>
+            <div class="flex-item image fit round">
+                <img src="/image/dog1.jpg" alt="" width="330" height="330">
+            </div>
+            <div class="flex-item right">
+                <div>
+                    <h3>병원 정보</h3>
+                    <p>동물이 갑자기 아플 땐 어디로 가야되나요?<br>모든 동물병원 정보 및 영업 시간 등 많은 정보를 알아가요</p>
+                </div>
+                <div>
+                    <h3>자유 게시판</h3>
+                    <p>자유로운 질문 게시판<br>물어보고싶은게 있으면 언제든지 질문을 해봐요</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="two" class="wrapper style1 special">
+        <div class="inner">
+            <h2>PetKorea</h2>
+            <figure>
+                <blockquote>
+                "삶은 말하지 못하는 생명체들에게도 소중한 것이다.<br> 사람이 행복을 원하고 고통을 두려워하며 생명을 원하는 것처럼, 그들 역시 그러하다."
+                </blockquote>
+                <footer>
+                    <cite class="author">달라이 라마 Dalai Lama</cite>
+                    <cite class="company"> ཏ་ཱལའི་བླ་མ་ taa-la’i bla-ma</cite>
+                </footer>
+            </figure>
+        </div>
+    </section>
+
+    <section id="three" class="wrapper">
+        <div class="inner flex flex-3">
+            <div class="flex-item box">
+                <div class="image fit">
+                    <img src="/image/dog2.jpg" alt="" width="418" height="200">
+                </div>
+                <div class="content">
+                    <h3>Photo Gallery</h3>
+                    <p>당신의 아름다운 반려동물 사진을 다같이 공유하고 반려동물과의 추억을 함께 만들어가요</p>
+                </div>
+            </div>
+            <div class="flex-item box">
+                <div class="image fit">
+                    <img src="/image/dog3.jpg" alt="" width="418" height="200">
+                </div>
+                <div class="content">
+                    <h3>Pet Equipment</h3>
+                    <p>반려동뮬이 사용하는 용품들의 실제 사용후기를 공유해주세요. 반려동물들의 용품들을 살 수 있어요</p>
+                </div>
+            </div>
+            <div class="flex-item box">
+                <div class="image fit">
+                    <img src="/image/dog4.jpg" alt="" width="418" height="200">
+                </div>
+                <div class="content">
+                    <h3>Animal Hospital</h3>
+                    <p>반려동물이 갑자기 아플 때 갈 수 있는 동물 병원의 위치와 정보를 한눈에 알아볼 수 있어요</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="inner">
+            <h2>Developer Information</h2>
+            <ul class="actions">
+                <li><i class="fa-solid fa-blog"></i> <a href="https://shpark0920.tistory.com/">shpark0920.tistory.com</a></li>
+                <li><i class="fa-brands fa-github"></i><a href="https://github.com/sh990920">github.com/sh990920</a></li>
+                <li><i class="fa-brands fa-github"></i><a href="https://github.com/NUKAHMIX">github.com/NUKAHMIX</a> </li>
+            </ul>
+        </div>
+    </footer>
+    <div class="copyright">
+        Powered by: <a href="https://templated.co/">TEMPLATED</a>.
+    </div>
+
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrolly.min.js"></script>
+<script src="/js/skel.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+</html>

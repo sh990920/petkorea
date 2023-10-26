@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <script th:inline="javascript">
+        let error = [[${error}]];
+        let errorMessage = [[${errorMessage}]];
+        if ( error == "true" ) {
+            alert(errorMessage);
+            location.href="/loginPage/";
+        }
+    </script>
+    <script>
+    </script>
+    <script src="/js/httpRequest.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/signUp.js"></script>
+    <script src="/js/developing.js"></script>
+</head>
+<body>
+    <div class="container right-panel-active">
+        <!-- Sign Up -->
+        <div class="container__form container--signup">
+            <form action="#" class="form" id="form1">
+                <h2 class="form__title">Sign Up</h2>
+                <input id="signUp_id" type="text" placeholder="Id" class="input" />
+                <input id="signUp_email" type="email" placeholder="Email" class="input" />
+                <input id="signUp_password" type="password" placeholder="Password" class="input" />
+                <button class="btn" onclick="signUp();">Sign Up</button>
+            </form>
+        </div>
+
+        <!-- Sign In -->
+        <div class="container__form container--signin">
+            <form method="POST" action="/loginPage/login/" class="form" id="form2">
+                <h2 class="form__title">Sign In</h2>
+                <input id="id" name="id" type="text" placeholder="Id" class="input" />
+                <input id="password" name="password" type="password" placeholder="Password" class="input" />
+                <input type="button" class="link" value="Forgot your password?" onclick="developing();" style="border: none;">
+                <button class="btn" onclick="login(this.form);">Sign In</button>
+            </form>
+        </div>
+
+        <!-- Overlay -->
+        <div class="container__overlay">
+            <div class="overlay">
+                <div class="overlay__panel overlay--left">
+                    <button class="btn" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay__panel overlay--right">
+                    <button class="btn" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/loginPage.js"></script>
+    <link href="/css/loginPage.css" rel="stylesheet">
+</body>
+</html>
